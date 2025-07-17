@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>แอพประเมิน DSPM</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>ประเมินพัฒนาการเด็ก DSPM</h1>
+
+    <label for="age">เลือกอายุ (เดือน):</label>
+    <select id="age">
+        <option value="2">2 เดือน</option>
+        <option value="4">4 เดือน</option>
+        <option value="6">6 เดือน</option>
+        <!-- เพิ่มอายุตามต้องการ -->
+    </select>
+
+    <div id="questions"></div>
+
+    <button onclick="submitAssessment()">ส่งผลประเมิน</button>
+
+    <div id="result"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

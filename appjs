@@ -1,0 +1,56 @@
+const questionsByAge = {
+    2: [
+        { id: 1, text: "ยิ้มตอบ", key: "smile", passed: false },
+        { id: 2, text: "ยกหัวได้", key: "liftHead", passed: false }
+    ],
+    4: [
+        { id: 3, text: "คว้าของเล่นได้", key: "grabToy", passed: false },
+        { id: 4, text: "หัวตั้งตรงได้", key: "headControl", passed: false }
+    ],
+    6: [
+        { id: 5, text: "นั่งได้เอง", key: "sitAlone", passed: false },
+        { id: 6, text: "ส่งเสียงตอบ", key: "respondSound", passed: false }
+    ]
+};
+
+const ageSelect = document.getElementById('age');
+const questionsDiv = document.getElementById('questions');
+const resultDiv = document.getElementById('result');
+
+function renderQuestions() {
+    const age = ageSelect.value;
+    questionsDiv.innerHTML = '';
+
+    if (!questionsByAge[age]) {
+        questionsDiv.innerHTML = "<p>ไม่มีคำถามสำหรับช่วงอายุนั้น</p>";
+        return;
+    }
+
+    questionsByAge[age].forEach(q => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+            <label>
+                <input type="checkbox" id="q${q.id}" />
+                ${q.text}
+            </label>
+        `;
+        questionsDiv.appendChild(div);
+    });
+}
+
+ageSelect.addEventListener('change', renderQuestions);
+window.onload = renderQuestions;
+
+function submitAssessment() {
+    const age = ageSelect.value;
+    const questions = questionsByAge[age];
+    let passCount = 0;
+
+    questions.forEach(q => {
+        const checkbox = document.getElementById(`q${q.id}`);
+        q.passed = checkbox.checked;
+        if (checkbox.checked) passCount++;
+    });
+
+    resultDiv.innerHTML = `<p>ผ่าน ${passCount} / ${questions.length} ข้อ</p>`;
+}
